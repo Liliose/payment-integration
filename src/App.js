@@ -4,11 +4,18 @@ import "./styles/main.scss";
 import button from '@material-ui/core/button';
 function App() {
 	const [amount, setAmount] = useState(0);
+
+	const showModal = () => {
+		document.querySelector(".payment-modal").classList.remove("d-none");
+	}
+	const hideModal = () => {
+		document.querySelector(".payment-modal").classList.add("d-none");
+	}
 	return (
 		<>
 			<div className="app">
 				<div className="app-contents">
-					<form>
+					<form onSubmit={(e) => {e.preventDefault();showModal();}}>
 						<div className="text-center mb-3" style={{color:"blue"}}>MAKE A ONE-TIME GIFT</div>
 						<div className="row">
 							<div className="col">
@@ -36,8 +43,18 @@ function App() {
 						<div className="text-right my-2">
 							<input type="checkbox" required /> I will cover my transfer fees
 						</div>
-						<input type="submit" value="Donate" className="btn btn-primary w-100" />
+						<input type="submit" value="Donate" className="btn btn-submit-bg w-100" />
 					</form>
+				</div>
+			</div>
+
+			<div className="payment-modal d-none">
+				<div className="modal-content pb-5 px-5 pt-2">
+					<div className="text-right mb-3">
+						<span onClick={hideModal}>&times;</span>
+					</div>
+					<button className="btn btn-primary mb-3">Pay With PayPal</button>
+					<button className="btn btn-primary">Pay With MOMO</button>
 				</div>
 			</div>
 		</>
